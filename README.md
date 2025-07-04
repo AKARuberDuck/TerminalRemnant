@@ -1,6 +1,6 @@
 # 🔐 Terminal Lockdown: REMNANT Protocol
 
-> A local-only encrypted riddle engine for multi-agent play — no servers, no sync, no mercy. This is the standalone sequel to Terminal Lockdown, built for offline use as a Progressive Web App (PWA).
+> A local-only encrypted riddle engine for multi-agent play — no servers, no sync, no mercy. This is the standalone sequel to **Terminal Lockdown**, built for offline use as a Progressive Web App **(PWA)**.
 
 ---
 
