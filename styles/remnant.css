@@ -1,0 +1,53 @@
+/* Glitch Flash Effect */
+@keyframes glitchFlash {
+  0%   { background-color: #0b0f0c; }
+  50%  { background-color: #330000; }
+  100% { background-color: #0b0f0c; }
+}
+
+.glitch-flicker {
+  animation: glitchFlash 0.4s ease-in-out;
+}
+
+/* Emergency Red Overlay */
+@keyframes flashRed {
+  0%   { background-color: #0b0f0c; }
+  50%  { background-color: #990000; }
+  100% { background-color: #0b0f0c; }
+}
+
+.emergency-flash {
+  animation: flashRed 0.4s ease;
+}
+
+/* Format Mutation Visual */
+#formatDisplay.mutated {
+  color: #ff00cc;
+  text-shadow: 0 0 4px #ff00cc;
+}
+
+/* Corrupted Journal Text */
+.redacted {
+  background-color: #000;
+  color: #990000;
+  text-decoration: line-through;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* Codex Mutation */
+#codexContent.corrupted {
+  color: #cccccc;
+  text-shadow: 0 0 2px #ff0000;
+}
+
+/* Lore Fragment Flash */
+@keyframes loreUnlockGlow {
+  0% { color: #00ff88; }
+  50% { color: #ffff00; }
+  100% { color: #00ff88; }
+}
+
+.lore-glow {
+  animation: loreUnlockGlow 1s ease-in-out;
+}
