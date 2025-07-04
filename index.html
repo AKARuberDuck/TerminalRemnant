@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TERMINAL LOCKDOWN: REMNANT PROTOCOL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/remnant.css" />
+  <link rel="icon" href="icons/icon-192.png" />
+</head>
+<body>
+  <div id="terminal">
+    <pre id="asciiBanner" class="ascii-banner">BOOTING SYSTEM...</pre>
+
+    <!-- 🧑‍💻 Login Interface -->
+    <form id="loginForm" onsubmit="return false;" autocomplete="off">
+      <div id="loginPanel">
+        <input id="loginUsername" name="username" placeholder="Agent Name" autocomplete="username" />
+        <input id="loginPassword" name="password" type="password" placeholder="Access Code" autocomplete="current-password" />
+        <button type="button" id="loginBtn">LOGIN</button>
+        <button type="button" id="createAccountBtn">REGISTER</button>
+      </div>
+    </form>
+
+    <!-- 🎮 Game Panel -->
+    <div id="gamePanel" style="display:none;">
+      <div id="levelDisplay"></div>
+      <p id="riddle"></p>
+      <p id="formatDisplay"></p>
+      <div id="inputArea">
+        <input id="asciiInput" placeholder="ASCII CODE..." />
+        <span class="cursor-blink"></span>
+      </div>
+      <div id="status"></div>
+      <p id="timerDisplay"></p>
+    </div>
+
+    <!-- 🧪 Sandbox Tools -->
+    <div id="sandboxPanel" style="display:none;">
+      <input id="sandboxInput" placeholder="Decode / Encode..." />
+      <select id="sandboxMode">
+        <option value="ENC_DEC">ENC DEC</option>
+        <option value="ENC_HEX">ENC HEX</option>
+        <option value="ENC_OCT">ENC OCT</option>
+        <option value="DEC">DEC → ASCII</option>
+        <option value="HEX">HEX → ASCII</option>
+        <option value="OCT">OCT → ASCII</option>
+      </select>
+      <pre id="sandboxOutput"></pre>
+    </div>
+
+    <!-- 📓 Agent Journal -->
+    <div id="journalPanel" style="display:none;">
+      <textarea id="journalTextarea" placeholder="Agent log..."></textarea>
+      <label><input type="checkbox" id="encryptJournal" /> Encrypt Entry</label>
+      <button id="saveJournalBtn">Save</button>
+      <button id="decryptJournalBtn">Decrypt</button>
+    </div>
+
+    <!-- 📚 Codex Memory -->
+    <div id="codexPanel" style="display:none;">
+      <input id="codexSearch" placeholder="Search riddles..." />
+      <pre id="codexContent"></pre>
+    </div>
+
+    <!-- 📊 Metrics Panel -->
+    <div id="metricsPanel" style="display:none;">
+      <pre id="metricsLog"></pre>
+    </div>
+
+    <!-- 🧑‍💻 Other Agent Stats -->
+    <div id="agentStatsPanel" style="display:none;">
+      <select id="agentSelect"></select>
+      <pre id="agentStatsDisplay"></pre>
+    </div>
+
+    <!-- 🔔 Glitch Toast -->
+    <div id="badgeToast" class="toast hidden"></div>
+
+    <!-- ⚙️ Navigation Buttons -->
+    <button id="sandboxToggle">🧪 SANDBOX</button>
+    <button id="journalToggle">📓 JOURNAL</button>
+    <button id="codexToggle">📚 CODEX</button>
+    <button id="metricsToggle">📊 METRICS</button>
+    <button id="toggleStatsBtn">🧑‍💻 AGENTS</button>
+
+    <!-- 🪶 Footer -->
+    <footer>
+      TERMINAL LOCKDOWN: REMNANT PROTOCOL — MIT License — Created by AKARuberDuck
+    </footer>
+  </div>
+
+  <!-- 🚀 Script Loader (Correct Order) -->
+  <script src="renderer/utils.js"></script>
+  <script src="renderer/riddles_remnant.js"></script>
+  <script src="renderer/app.js"></script>
+  <script src="renderer/remnantEngine.js"></script>
+  <script src="renderer/journal.js"></script>
+  <script src="renderer/echoCodex.js"></script>
+  <script src="renderer/loreFragments.js"></script>
+  <script src="renderer/sandboxTools.js"></script>
+  <script src="renderer/uiEnhancements.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
