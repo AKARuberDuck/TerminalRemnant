@@ -1,4 +1,4 @@
-// 🧠 Encode answers for speed
+// 🧠 Pre-encode riddles
 riddles.forEach(r => {
   r.encodedAnswers = r.answers.map(ans => wordToAscii(ans, r.format));
 });
@@ -13,7 +13,7 @@ let formatVisible = true;
 let lockBackspace = false;
 let timer;
 
-// 🔐 LOGIN SYSTEM
+// 🧑‍💻 LOGIN
 loginBtn.onclick = () => {
   const name = loginUsername.value.trim();
   const pass = loginPassword.value.trim();
@@ -30,7 +30,7 @@ loginBtn.onclick = () => {
   });
 };
 
-// 🧑‍💻 ACCOUNT CREATION
+// 🆕 REGISTER
 createAccountBtn.onclick = () => {
   const name = loginUsername.value.trim();
   const pass = loginPassword.value.trim();
@@ -52,7 +52,7 @@ createAccountBtn.onclick = () => {
   });
 };
 
-// 🚀 START GAME
+// 🚀 GAME START
 function startGame() {
   loginPanel.style.display = "none";
   gamePanel.style.display = "block";
@@ -61,7 +61,7 @@ function startGame() {
   nextRiddle();
 }
 
-// 🎚️ DIFFICULTY TIER
+// 🎚️ DIFFICULTY TIERING
 function getDifficultyTier(level) {
   if (level < 6) return "Standard Ops";
   if (level < 11) return "Anomaly Zone";
@@ -73,26 +73,38 @@ function applyDifficultySettings(level) {
   const tier = getDifficultyTier(level);
   switch (tier) {
     case "Standard Ops":
-      timerLimit = 30; formatVisible = true;
-      scrambleRiddles = false; lockBackspace = false; break;
+      timerLimit = 30;
+      formatVisible = true;
+      scrambleRiddles = false;
+      lockBackspace = false;
+      break;
     case "Anomaly Zone":
-      timerLimit = 20; formatVisible = false;
-      scrambleRiddles = true; lockBackspace = false;
-      tierAlert(tier); break;
+      timerLimit = 20;
+      formatVisible = false;
+      scrambleRiddles = true;
+      lockBackspace = false;
+      tierAlert(tier);
+      break;
     case "Blackout Protocol":
-      timerLimit = 15; formatVisible = false;
-      scrambleRiddles = true; lockBackspace = true;
-      tierAlert(tier); break;
+      timerLimit = 15;
+      formatVisible = false;
+      scrambleRiddles = true;
+      lockBackspace = true;
+      tierAlert(tier);
+      break;
     case "REMNANT Loop":
-      timerLimit = 15; formatVisible = false;
-      scrambleRiddles = true; lockBackspace = true;
-      tierAlert(tier); break;
+      timerLimit = 15;
+      formatVisible = false;
+      scrambleRiddles = true;
+      lockBackspace = true;
+      tierAlert(tier);
+      break;
   }
   levelDisplay.textContent = `LEVEL ${level} — ${tier}`;
   users[currentUser].rank = calculateRank(users[currentUser].stats);
 }
 
-// 🧠 RANK CALCULATOR
+// 🎖️ RANK LOGIC
 function calculateRank(stats) {
   const ratio = stats.solved / (stats.failures + 1);
   if (ratio > 4) return "Cipher Marshal";
@@ -101,9 +113,9 @@ function calculateRank(stats) {
   return "Entropy Fodder";
 }
 
-// 🔄 RIDDLE SELECTOR
+// 🔄 NEXT RIDDLE
 function nextRiddle() {
-  currentRiddle = getDailyRiddle(); // use seed logic
+  currentRiddle = getDailyRiddle();
   applyRemnantMutation(level);
 
   if (scrambleRiddles) {
@@ -128,12 +140,12 @@ function nextRiddle() {
   }, 1000);
 }
 
-// 💥 SCRAMBLE TEXT
+// 🔀 SCRAMBLE TEXT
 function scrambleText(text) {
   return text.split("").sort(() => 0.5 - Math.random()).join("");
 }
 
-// 🧑‍💻 INPUT HANDLER
+// 🎯 INPUT HANDLER
 asciiInput.addEventListener("keydown", e => {
   if (lockBackspace && e.key === "Backspace") {
     e.preventDefault();
@@ -148,7 +160,7 @@ asciiInput.addEventListener("keydown", e => {
   }
 });
 
-// 📜 LOG HISTORY
+// 🗂️ HISTORY LOG
 function logHistory(answer, success) {
   users[currentUser].history.push({
     riddle: currentRiddle.riddle,
@@ -183,7 +195,7 @@ function failureHandler(reason = "❌ ACCESS DENIED") {
   setTimeout(nextRiddle, 2000);
 }
 
-// 🧠 DAILY CHALLENGE
+// 📅 DAILY SEED
 function dailySeed() {
   const date = new Date().toDateString();
   let hash = 0;
@@ -198,7 +210,7 @@ function getDailyRiddle() {
   return riddles[Math.abs(seed) % riddles.length];
 }
 
-// 📄 LOAD PROFILE
+// 🔍 PROFILE LOAD
 function loadProfile(name) {
   const agent = users[name];
   if (agent.journal) {
@@ -213,3 +225,24 @@ window.addEventListener("beforeunload", () => {
     localStorage.setItem("lockdownUsers", JSON.stringify(users));
   }
 });
+
+// 🎛️ PANEL TOGGLES
+sandboxToggle.onclick = () => {
+  sandboxPanel.style.display = sandboxPanel.style.display === "none" ? "block" : "none";
+};
+
+journalToggle.onclick = () => {
+  journalPanel.style.display = journalPanel.style.display === "none" ? "block" : "none";
+};
+
+codexToggle.onclick = () => {
+  codexPanel.style.display = codexPanel.style.display === "none" ? "block" : "none";
+};
+
+metricsToggle.onclick = () => {
+  metricsPanel.style.display = metricsPanel.style.display === "none" ? "block" : "none";
+};
+
+toggleStatsBtn.onclick = () => {
+  agentStatsPanel.style.display = agentStatsPanel.style.display === "none" ? "block" : "none";
+};
